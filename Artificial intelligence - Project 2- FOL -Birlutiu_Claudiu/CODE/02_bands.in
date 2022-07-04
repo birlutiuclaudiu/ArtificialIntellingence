@@ -1,0 +1,43 @@
+set(arithmetic).        % Pentru relatia "right neighbor" si "left neighbor".
+assign(domain_size, 5).  %Cei 5 muzicieni {0,1,2,3,4}.
+
+list(distinct).      % Definirea obiectelor distincte.
+  [Bryan, Dustin, Eibert, Joey, Larry].                                            %name
+  [BalckShirt, BlueShirt, GreenShirt, RedShirt, WhiteShirt].                       %color of shirt
+  [Age_26, Age_28, Age_30, Age_32, Age_34 ].                                       %ages
+  [Bass, Drums, Guitar, Harmonica, Piano].                                         %instruments
+  [ApocalypseBlues, BearBlues, BluesUp, LazyBlues, TheBluesCathedral].             %genre
+  [Apple, GrapeFruit, Lemon, Orange, StrawBerry].                                  %juice
+
+end_of_list.
+
+formulas(assumptions). 
+   % Definitions of "right_neighbor" and "left_neighbor"
+   right_neighbor(x,y) <-> x = y+1.
+   left_neighbor(x, y) <-> x+1= y.
+   neighbor(x,y) <-> right_neighbor(x,y) | left_neighbor(x,y). 
+
+    %Indiciile
+    left_neighbor(Harmonica, Guitar).
+    BlueShirt > Age_34 & BlueShirt < RedShirt.
+    Larry = 0 | Larry = 4.
+    neighbor(Harmonica, Apple).
+    StrawBerry = 1.
+    Drums > BlueShirt.
+    neighbor(Larry, LazyBlues).
+    neighbor(Bryan, Piano).
+    Age_26 = 0 | Age_26 = 4.
+    Piano = ApocalypseBlues.
+    left_neighbor(Age_28, Age_30).
+    GreenShirt < BearBlues.
+    neighbor(Joey, BlueShirt).
+    right_neighbor(GrapeFruit, TheBluesCathedral).
+    GrapeFruit = GreenShirt.
+    Lemon > WhiteShirt & Lemon < Age_30.
+    right_neighbor(BluesUp, RedShirt).
+    Piano = 0.
+    neighbor(Dustin, TheBluesCathedral).
+    right_neighbor(Harmonica, RedShirt).
+
+end_of_list.
+

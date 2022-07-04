@@ -1,0 +1,163 @@
+\section{Adversarial search}
+
+% ============================================= Improve the ReflexAgent ============================= 
+\subsection{Question 8 - Improve the ReflexAgent}
+% enuntul intrebarii
+In aceasta sectiune va fi descris exercitiul 4.8 din laborator: \newline
+
+\textit{"Improve the ReflexAgent such that it selects a better action. Include in the score food locations and ghost locations. The layout testClassic should be solved more often."}.
+
+
+\subsubsection{Code implementation}
+In continuare se regaseste descrirerea perceptiei de moment a agentului. In incercarea de implementare si apoi testare a solutiei propuse s-au apelat mai multe comenzi din terminal pentru a vedea evolutia agentului pacman in procesul de cautare a solutiei sale \newline \\
+
+
+\textbf{Code:}
+
+% a se completa fisierul code/8_reflex_agent.py
+\inputminted[linenos]{python}{code/08_reflex_agent.py}
+
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item am aplicat mai multe aporturi pentru perceptia de moment a agentului; in primul rand am luat in calcul cat de aproape se afla de mancare, cat de departe se afla de fantome si cate miscari sunt valabile in momentul in care vor fi inghetate fantomele
+    \item distanta fata de mancare trebuie sa contribuie invers proportional la perceptia totala, deoarece cu cat mancarea e mai departe, cu atat nu ii convine agentului situatia. De aceea score-ului final o sa ii adun inversul distantelor fata de mancare. Cu cat distanta e mai mica, cu ata aportul la rezultatul final e mai mare. (linia 11)
+    \item cu cat fantomele sunt mai departe, cu atat e mai bine agentului, de aceea o sa adun score-ului a suta parte din distantele fata de fantome (linia 13)
+    \item numarul de miscari cand fantomele sunt inghetate va contribui cu a 100 parte la rezultatul final (linia 16)
+    
+
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item -p ReflexAgent -l testClassic
+    \item  --frameTime 0 -p ReflexAgent -k 1 -l mediumClassic
+    \item -p ReflexAgent -l openClassic   
+\end{itemize}
+
+\subsubsection{Questions}
+
+\textbf{Q1:} Test your agent on the openClassic layout. Given a number of 10 consecutive tests, how many types did your agent win? What is your average score (points)?
+
+\textbf{A1:} 9/10 meciuri castigate. O medie de aproximativ 1230 de puncte
+
+
+\subsubsection{Personal observations and notes}
+In cele 10 incercari, agentul nu a mancat acea bucata de mancare care ar fi inghetat fantoma
+
+\vspace{0.75cm}
+
+% ============================================= H-Minimax algorithm ============================= 
+\subsection{Question 9 - H-Minimax algorithm}
+% enuntul intrebarii
+Aceasta sectiune este dedicata exercitiului 4.9 din laborator si se cere: \newline
+
+\textit{" Implement H-Minimax algorithm in MinimaxAgentclass from multiAgents.py. Since it can be more  than one ghost, for each max layer there are one ormore min layers."}.
+
+
+\subsubsection{Code implementation}
+In continuare este implementat si explicat algoritmul minimax. In incercarea de implementare si apoi testare a solutiei propuse s-au apelat mai multe comenzi din terminal pentru a vedea evolutia agentului pacman in procesul de cautare a solutiei sale \newline \\
+
+\textbf{Code:}
+
+% a se completa fisierul code/9_h_minimax.py
+\inputminted[linenos]{python}{code/09_h_minimax.py}
+
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item acest algoritm este de tipul \textbf{adversial search} in care doi sau mai multi agenti au scopuri diferite si se formeaza un mediu competitiv; in cazul jocului pacman avem doua tipuri de agenti: pacman care este agentul MAX si fantomele care sunt agentii MIN. 
+    \item algoritmul de fata este insipirat din [1] si a fost adaptat pentru cazul in care sunt mai multi adversari, iar atunci exista mai multe nivele pentru MIN (fantome)
+    \item o alta cosntrangere e adancimea pana la care sa se calculeze evaluarea starilor. Din punct de vedere al timpului de executie, este extrem de greu sa se parcurga intreg \textbf{game tree-ul} 
+    \item ideea consta in faptul ca valoarea returnata de  \textbf{h\_minimax}  reprezinta utilitatea pentru agentul MAX de a fi in acea stare. MAX prefera o stare cu o valoare maxima, pe cand MIN prefera o stare cu valoare minima
+    \item deoarece avem mai multi agenti de tip MIN, atunci trebuie sa se formeze mai multe nivele cu acestia; se considera actiunile fantomelor secvential 
+    \item algoritmul propus tine cont si de adancimea maxima la care se va parcurge game tree-ul si este reprezentata de variabila \textbf{depth}
+    \item liniile 13-17: este implementata o functie care face testul de cut-off; algoritmul de cautare a unei stari optime se termina in momentul in care starea respectiva duce la pierderea sau castigul jocului sau se afla la adancimea limita pe care am impus-o pentru parcurgerea game tree-ului
+    \item functia \textbf{h\_minimax} va fi functia care se va apela de MAX si MIN. In momentul in care agentul este MAX (s-a ajuns la numarul maxim de agenti ai jocului- linia 23), atunci s-a terminat un nivel de cautare si se incrementeaza variabila \textit{depth}. In functie de randul agentului, se va merge pe una dintre cele doua ramuri de la liniile 32-36
+    \item metoda \textbf{max\_value} va fi apelata de MAX si ea va returna o actiune nula si evaluarea in starea respectiva daca nu exista alternative de plecare din starea aceea, sau va lua valoarea maxima a stariilor succesoare cu actiunea aferenta
+    \item metoda \textbf{min\_value} va fi apelata de MIN si ea va returna o actiune nula si evaluarea in starea respectiva daca nu exista alternative de plecare din starea aceea, sau va lua valoarea minima dintre starile succesoare cu actiunea aferenta
+    \item s-a folosit list comprehension
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item -p MinimaxAgent -l minimaxClassic -a depth=4
+    \item -p MinimaxAgent -l trappedClassic -a depth=3
+        
+\end{itemize}
+
+\subsubsection{Questions}
+
+\textbf{Q1:} Test Pacman on trappedClassic layout and try to explain its behaviour. Why Pacman rushes to the ghost?
+
+\textbf{A1:} Deoarece sansele lui Pacman de a manca bucatile de mancare sunt foarte mici, el alege varianta de a muri cat mai repede, deoarece functia de evaluare a starilor tine cont si de scorul jocului. Astfel cu cat moare mai repede in asemnea situatie el va castiga mai multe puncte. De aceea se grabeste catre fantoma. Aici joaca un rol important adancimea cu care se apeleaza h\_minimax.
+
+
+\vspace{0.75cm}
+
+% =============================================  a-b pruning in ABAgent ============================= 
+\subsection{Question 10 -  Use $\alpha - \beta$ pruning in AlphaBetaAgent}
+% enuntul intrebarii
+Aceasta sectiune este dedicata exercitiului 4.11 din laborator si se cere: \newline
+
+
+\textit{" Use alpha-beta prunning in \textbf{AlphaBetaAgent} from multiagents.py for a more efficient exploration of minimax tree."}.
+
+
+\subsubsection{Code implementation}
+In continuare este implementat si explicat algoritmul minimax cu $\alpha-\beta$ prunning. In incercarea de implementare si apoi testare a solutiei propuse s-au apelat mai multe comenzi din terminal pentru a vedea evolutia agentului pacman in procesul de cautare a solutiei sale \newline \\
+
+\textbf{Code:}
+
+% a se completa fisierul code/10_ab_prunning.py
+\inputminted[linenos]{python}{code/10_ab_prunning.py}
+
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item acesta algoritm vine pentru a reduce numarul de stari explorate din arborele jocului; 
+     \begin{itemize}
+        \setlength\itemsep{0em}
+        \item$\alpha$ - reprezinta valoarea celei mai bune alegeri dintre punctele de decizie de-a lungul caii pentru MAX, iar 
+        \item $\beta$ -reprezinta valoarea cea mai buna (cea mai mica) a unei alegeri pe care o face MIN de-a lungul caii sale decizionale
+        \end{itemize}
+    \item codul repectiv a fost inspirat din [1] 
+    \item prin aceasta tehnica o mare parte din arbore nu va fi explorata daca nu va influenta cu nimic iesirea
+    \item terminarea algoritmului este data de aceeasi functie de cut\_off\-test, iar metoda \textbf{h\_alpha\_beta\_prunning} este simimara cu \textbf{h\_minmax} numai ca are doi parametri in plus (alfa si beta)
+    \item in cadrul metodei \textbf{max\_value} pe care o va executa agentul MAX, se va lua fiecare stare succesoare si se va calcula evaloarea acetei stari de decizie. Daca valoarea curent obtinua e mai buna decat cea pentru starea anterioara atunci se va actualiza starea in care va merge  agentul, si se va actualiza si valoarea alpha (linia 58) daca valoarea obtinuta este mai buna decat cea pe care am avut-o inainte. Ideea de prunning o regasim la linia 59, unde daca valoarea obtinuta pentru o stare este mai mare decat beta, atunci nu mai are rost sa se continue cu expandarea succesorilor
+    \item aceeasi logica este aplicata si pentru \textbf{min\_value} 
+    
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item  -p AlphaBetaAgent -a depth=3 -l smallClassic
+
+        
+\end{itemize}
+
+\subsubsection{Questions}
+This sub-section is dedicated to the additional questions that come along with the exercise. Please answer to the following questions:\newline
+
+
+\textbf{Q1:} Test your implementation with autograder \textbf{python autograder.py} for Question 3. What are your results?
+
+\textbf{A1:} Question q3: 5/5
+
+\subsubsection{Personal observations and notes}
+% descrieti aici orice fel de probleme ati intampinat in timpul rezolvarii acestui task si modul cum in care le-ati solutionat
+
+\vspace{0.75cm}
+
+\subsection{References}
+[1]R. Stuart, N. Peter, Artificial Intelligence: A Modern Approach, 4th US ed., capitol 3, [online] \newline
+[2]Curs Inteligenta Artficiala, Universitatea Tehnica din Cluj Napoca, furnizat: moodle.cs.utcluj.ro

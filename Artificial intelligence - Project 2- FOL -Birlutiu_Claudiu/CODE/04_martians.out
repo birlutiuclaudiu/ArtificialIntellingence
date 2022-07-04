@@ -1,0 +1,178 @@
+============================== Mace4 =================================
+Mace4 (64) version 2017-11A (CIIRC), November 2017.
+Process 13276 was started by birlutiuclaudiu on birlutiuclaudiu-HP-Pavilion-Laptop-15-cs3xxx,
+Tue Dec  7 18:49:58 2021
+The command was "mace4 -c -n 4 -m -1 -f 04_martians.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file 04_martians.in
+
+set(arithmetic).
+    % set(arithmetic) -> clear(lnh).
+    % set(arithmetic) -> assign(selection_order, 0).
+
+    % Declaring Mace4 arithmetic parse types.
+
+list(distinct).
+[Aken,Bal,Cwos,Doman].
+end_of_list.
+
+formulas(assumptions).
+Aken = 0.
+Bal = 1.
+Cwos = 2.
+Doman = 3.
+Uti(x) -> -Yomi(x) & -Grundi(x).
+Yomi(x) -> -Uti(x) & -Grundi(x).
+Grundi(x) -> -Uti(x) & -Yomi(x).
+Uti(Aken) | Yomi(Aken) | Grundi(Aken).
+Uti(Bal) | Yomi(Bal) | Grundi(Bal).
+Uti(Cwos) | Yomi(Cwos) | Grundi(Cwos).
+Uti(Aken) -> -Uti(Bal) & -Uti(Cwos).
+Uti(Bal) -> -Uti(Aken) & -Uti(Cwos).
+Uti(Cwos) -> -Uti(Bal) & -Uti(Aken).
+Yomi(Aken) -> -Yomi(Bal) & -Yomi(Cwos).
+Yomi(Bal) -> -Yomi(Aken) & -Yomi(Cwos).
+Yomi(Cwos) -> -Yomi(Bal) & -Yomi(Aken).
+Grundi(Aken) -> -Grundi(Bal) & -Grundi(Cwos).
+Grundi(Bal) -> -Grundi(Aken) & -Grundi(Cwos).
+Grundi(Cwos) -> -Grundi(Bal) & -Grundi(Aken).
+Uti(Aken) -> -Uti(Aken) & Yomi(Doman).
+Yomi(Aken) -> Uti(Aken) & -Yomi(Doman).
+Uti(Bal) -> -Yomi(Bal) & Grundi(Doman).
+Yomi(Bal) -> Yomi(Bal) & -Grundi(Doman).
+Uti(Cwos) -> -Grundi(Cwos) & Uti(Doman).
+Yomi(Cwos) -> Grundi(Cwos) & -Uti(Doman).
+end_of_list.
+    % assign(domain_size, 4) -> assign(start_size, 4).
+    % assign(domain_size, 4) -> assign(end_size, 4).
+
+% From the command line: assign(domain_size, 4).
+
+% From the command line: assign(max_models, -1).
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 Uti(x) -> -Yomi(x) & -Grundi(x) # label(non_clause).  [assumption].
+2 Yomi(x) -> -Uti(x) & -Grundi(x) # label(non_clause).  [assumption].
+3 Grundi(x) -> -Uti(x) & -Yomi(x) # label(non_clause).  [assumption].
+4 Uti(Aken) -> -Uti(Bal) & -Uti(Cwos) # label(non_clause).  [assumption].
+5 Uti(Bal) -> -Uti(Aken) & -Uti(Cwos) # label(non_clause).  [assumption].
+6 Uti(Cwos) -> -Uti(Bal) & -Uti(Aken) # label(non_clause).  [assumption].
+7 Yomi(Aken) -> -Yomi(Bal) & -Yomi(Cwos) # label(non_clause).  [assumption].
+8 Yomi(Bal) -> -Yomi(Aken) & -Yomi(Cwos) # label(non_clause).  [assumption].
+9 Yomi(Cwos) -> -Yomi(Bal) & -Yomi(Aken) # label(non_clause).  [assumption].
+10 Grundi(Aken) -> -Grundi(Bal) & -Grundi(Cwos) # label(non_clause).  [assumption].
+11 Grundi(Bal) -> -Grundi(Aken) & -Grundi(Cwos) # label(non_clause).  [assumption].
+12 Grundi(Cwos) -> -Grundi(Bal) & -Grundi(Aken) # label(non_clause).  [assumption].
+13 Uti(Aken) -> -Uti(Aken) & Yomi(Doman) # label(non_clause).  [assumption].
+14 Yomi(Aken) -> Uti(Aken) & -Yomi(Doman) # label(non_clause).  [assumption].
+15 Uti(Bal) -> -Yomi(Bal) & Grundi(Doman) # label(non_clause).  [assumption].
+16 Yomi(Bal) -> Yomi(Bal) & -Grundi(Doman) # label(non_clause).  [assumption].
+17 Uti(Cwos) -> -Grundi(Cwos) & Uti(Doman) # label(non_clause).  [assumption].
+18 Yomi(Cwos) -> Grundi(Cwos) & -Uti(Doman) # label(non_clause).  [assumption].
+
+============================== end of process non-clausal formulas ===
+
+============================== CLAUSES FOR SEARCH ====================
+
+formulas(mace4_clauses).
+Aken = 0.
+Bal = 1.
+Cwos = 2.
+Doman = 3.
+-Uti(x) | -Yomi(x).
+-Uti(x) | -Grundi(x).
+-Yomi(x) | -Uti(x).
+-Yomi(x) | -Grundi(x).
+-Grundi(x) | -Uti(x).
+-Grundi(x) | -Yomi(x).
+Uti(Aken) | Yomi(Aken) | Grundi(Aken).
+Uti(Bal) | Yomi(Bal) | Grundi(Bal).
+Uti(Cwos) | Yomi(Cwos) | Grundi(Cwos).
+-Uti(Aken) | -Uti(Bal).
+-Uti(Aken) | -Uti(Cwos).
+-Uti(Bal) | -Uti(Aken).
+-Uti(Bal) | -Uti(Cwos).
+-Uti(Cwos) | -Uti(Bal).
+-Uti(Cwos) | -Uti(Aken).
+-Yomi(Aken) | -Yomi(Bal).
+-Yomi(Aken) | -Yomi(Cwos).
+-Yomi(Bal) | -Yomi(Aken).
+-Yomi(Bal) | -Yomi(Cwos).
+-Yomi(Cwos) | -Yomi(Bal).
+-Yomi(Cwos) | -Yomi(Aken).
+-Grundi(Aken) | -Grundi(Bal).
+-Grundi(Aken) | -Grundi(Cwos).
+-Grundi(Bal) | -Grundi(Aken).
+-Grundi(Bal) | -Grundi(Cwos).
+-Grundi(Cwos) | -Grundi(Bal).
+-Grundi(Cwos) | -Grundi(Aken).
+-Uti(Aken).
+-Yomi(Aken) | Uti(Aken).
+-Yomi(Aken) | -Yomi(Doman).
+-Uti(Bal) | -Yomi(Bal).
+-Uti(Bal) | Grundi(Doman).
+-Yomi(Bal) | -Grundi(Doman).
+-Uti(Cwos) | -Grundi(Cwos).
+-Uti(Cwos) | Uti(Doman).
+-Yomi(Cwos) | Grundi(Cwos).
+-Yomi(Cwos) | -Uti(Doman).
+Aken != Bal.
+Aken != Cwos.
+Aken != Doman.
+Bal != Cwos.
+Bal != Doman.
+Cwos != Doman.
+end_of_list.
+
+============================== end of clauses for search =============
+
+% The largest natural number in the input is 3.
+
+============================== DOMAIN SIZE 4 =========================
+
+============================== MODEL =================================
+
+interpretation( 4, [number=1, seconds=0], [
+
+        function(Aken, [ 0 ]),
+
+        function(Bal, [ 1 ]),
+
+        function(Cwos, [ 2 ]),
+
+        function(Doman, [ 3 ]),
+
+        relation(Grundi(_), [ 1, 0, 0, 0 ]),
+
+        relation(Uti(_), [ 0, 0, 1, 1 ]),
+
+        relation(Yomi(_), [ 0, 1, 0, 0 ])
+]).
+
+============================== end of model ==========================
+
+============================== STATISTICS ============================
+
+For domain size 4.
+
+Current CPU time: 0.00 seconds (total CPU time: 0.01 seconds).
+Ground clauses: seen=65, kept=56.
+Selections=0, assignments=0, propagations=16, current_models=1.
+Rewrite_terms=4, rewrite_bools=72, indexes=0.
+Rules_from_neg_clauses=0, cross_offs=0.
+
+============================== end of statistics =====================
+
+User_CPU=0.01, System_CPU=0.00, Wall_clock=0.
+
+Exiting with 1 model.
+
+Process 13276 exit (all_models) Tue Dec  7 18:49:58 2021
+The process finished Tue Dec  7 18:49:58 2021

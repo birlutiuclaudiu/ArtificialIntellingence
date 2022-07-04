@@ -1,0 +1,61 @@
+\section{Personal contribution}
+
+% =============================================  a-b pruning in ABAgent ============================= 
+\subsection{Question 11 - Define and solve your own problem.}
+% enuntul intrebarii
+In aceasta sectiune va fi descris un algoritm de cautare pe care l-am propus: \newline
+
+%%%%% PLEASE WRITE THE PROBLEM DEFINITION HERE %%%%%%%
+\textit{" Algorimul propus pentru implementare este bidirectional search pe A* , algoritm care in mod simultan face doua cautari: forward -de la starea initiala la scop si backward- de la scop la starea initiala. Speranta acestei abordari consta in coliziunea dintre cele doua cai, si apoi constructia caii finale. Principala motivatie pentru un astfel de algoritm este de a obtine un timp de cautare mai bun, astfel problema se poate imparti in 2, fiecare cu o complexitate de b\textsuperscript{(d/2)}. In consecinta, de la oproblema de complexitate O(b\textsuperscript{d} vom ajunge la o complexitate de O( b\textsuperscript{(d/2)} +  b\textsuperscript{(d/2)}) = O(b\textsuperscript{(d/2)})"}.
+
+
+\subsubsection{Code implementation}
+In aceasta subsectiune se va explica implementarea algoritmului propus si a testelor ce au fost realizate pentru verificarea corectitudinii solutiei propuse. \\
+
+\textbf{Code:}
+
+% a se completa fisierul code/11_prop_problem.py
+\inputminted[linenos]{python}{code/11_prop_problem.py}
+
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item codul este dupa pseudocodul din [1]
+    \item  pentru implementarea acestui algoritm s-a folosit structura de date \textbf{PriorityQueue} din util pentru a delimita frontierele
+    \item metoda \textbf{function} va calcula evaluarea unui nod in functie de costul caii din starea initiala la el si o estimare a costului pana la scop. Estimarea se va face printr-o euristica ce va fi ca mod default distanta manhattan
+    \item metoda \textbf{bidirectional\_best\_first\_search} va descrie logica de parcurgere a grafului. Pentru structura unui nod s-a folosit aceeasi clasa ca la celelalte solutii propuse anterior (bfs, dfs etc.). 
+        \begin{itemize}
+        \setlength\itemsep{0em}
+        \item la liniile 6 si 10 se vor crea nodurile de start pentru cele dua parcurgeri : forward si backward. Pentru nodul de start al parcurgerii backward se va lua scopul problemei
+        \item liniile 10-11: se creeaza o noua problema pentru backward in care se seteaza ca scopul starea initiala a problemei pentru forward
+        \item se creeza doua frontiere pentru cele 2 parcurgeri, si aceseat vor fi cozi de prioritati, iar prioritatea este data prin functia \textbf{function}
+        \item liniile 20-21: se creeaza doua dictionare de forma stare:nod (stare si nodul asociat ei). care vor fi populate cu nodurile explorate
+        \item la linia 23 se initializeaza o solutie care are ca si cost o valoare foarte mare
+        \item in bucla de parcuregere a grafului va fi conditionata de existanta de noduri in cele doua frontiere si de conditia de terminare data de metoda  \textbf{terminated}. In cazul in care suma costurilor primelor noduri din cele doua frontiere e mai mare decat ceea ce avem in solutia curenta, atunci nu mai continuam parcurgerea grafului si intoarcem solutia.
+        \item linia 33: se evalueaza cele doua noduri fruntase din cele doua frontiere pentru a decide pe care dintre ele sa le expandam (sa le determinam succesorii). Expandarea succesorilor se va face in metoda \textbf{proceed} . Daca starea nodului succesor nu se afla in reached, sau daca pentru aceasta situatie costul de a ajunge in starea asta e mai mic decat costul pe care il aveam deja din alta cale, se va actualiza valoarea la lnia 67 (de aceea am ales implementarea lui \textbf{reached} cu dictionar). Aceasta ultima remarca va duce la gasirea caii optime in toate cazurile pentru acet algoritm.  La linia 70 se va verifica coliziunea dintre parcurgerea forward si backward si in caz afirmativ se va face concatenarea celor doua cai (se tine cont de cadrul in care s-a realizat coliziunea prin \textit{dir}) 
+        \end{itemize}
+    \item metoda \textbf{join\_nodes} va concatena cele doua cai forward si backward. nf- va fi ultimul nod din calea de forward (calea se obtine prin relatia parinte) si nb - va fi ultimul nod din calea backward. Ideea consta in refacerea legaturilor parinte. Deoarece pentru parcurgerea backward avem cumva oglinda pentru cea forward, trebuie inversata si logica actiunilor (liniile 45-54).
+    \item metoda \textbf{a\_star\_bidirectional} va apela \textit{bidirectional\_best\_first\_search} si prin apelul metodei construct\_path (metoda prezentata la dfs) va construi lista de actiuni din relatiile copil parinte 
+
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item  -l tinyMaze -p SearchAgent -a fn=bis
+    \item  -l bigMaze -p SearchAgent -a fn=bis -z .5
+    \item -l mediumMaze -p SearchAgent -a fn=bis -z .5
+        
+\end{itemize}
+\subsubsection{Personal observations and notes}
+Algoritmul este optimal deoarece tot timpul returneaza solutia de cost minim. mediumMaze: 68 costul, 250 noduri expandate; bigMaze: 210 costul, 594 noduri expandate ; tinyMaze: 8 costul, 16 noduri expandate
+
+\vspace{0.75cm}
+
+\vspace{0.75cm}
+
+\subsection{References}
+[1]R. Stuart, N. Peter, Artificial Intelligence: A Modern Approach, 4th US ed., capitol 3, [online] \newline
+[2] https://notebook.community/aimacode/aima-python/search4e

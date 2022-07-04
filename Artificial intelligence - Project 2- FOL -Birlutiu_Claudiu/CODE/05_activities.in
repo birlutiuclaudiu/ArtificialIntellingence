@@ -1,0 +1,99 @@
+
+formulas(assumptions).
+    % sunt diferiti 
+    differentFrom(Daddy, Mummy).
+    differentFrom(Daddy, Granny).
+    differentFrom(Daddy, Melanie).
+    differentFrom(Daddy, Bill).
+    differentFrom(Mummy, Granny).
+    differentFrom(Mummy, Melanie).
+    differentFrom(Mummy, Bill).
+    differentFrom(Granny, Melanie).
+    differentFrom(Granny, Bill).
+    differentFrom(Melanie, Bill).
+
+    % simetria intre diferente
+    differentFrom(x, y) -> differentFrom(y,x).
+    
+    %fiecare persoana este intr-o camera, a purtat o pereche de papuci si face ceva diferit
+    %papuci
+    sandels(x) | officeShoes(x) | laceBoots(x) | sneakers1(x) | sneakers2(x).
+    %rooms
+    kitchen(x) | livingRoom(x) | childrenRoom(x) | bedroom(x).
+    %activities 
+    preparingDinner(x) | lookingAfterFlowers(x) | readingNewsPaper(x) | readingPhilosophyText(x) | readingSonnets(x) | watchingTV(x).
+
+
+    %proprietati care se aplica numai unei persoane
+    %incaltaminte; o persoana a purtat doar una din perechile de papuci 
+    sandels(x) & sandels(y) -> -differentFrom(x,y).
+    officeShoes(x) & officeShoes(y) -> -differentFrom(x,y).
+    laceBoots(x) & laceBoots(y) -> -differentFrom(x,y).
+    sneakers1(x) & sneakers1(y) -> -differentFrom(x,y).
+    sneakers2(x) & sneakers2(y) -> -differentFrom(x,y).
+    %activities; Persoanele din famile au activitati diferite
+    lookingAfterFlowers(x) & lookingAfterFlowers(y) -> -differentFrom(x,y).
+    readingNewsPaper(x) & readingNewsPaper(y) -> -differentFrom(x,y).
+    readingPhilosophyText(x) & readingPhilosophyText(y) -> -differentFrom(x,y).
+    readingSonnets(x) & readingSonnets(y) -> -differentFrom(x,y).
+    preparingDinner(x) & preparingDinner(y) -> -differentFrom(x,y).
+    watchingTV(x) & watchingTV(y) -> -differentFrom(x,y).
+
+    % O persoana poate sa se afle intr-o singura incapere la un moment dat
+    kitchen(x) -> -livingRoom(x).
+    kitchen(x) -> -childrenRoom(x).
+    kitchen(x) -> -bedroom(x).
+
+    livingRoom(x) -> -childrenRoom(x).
+    livingRoom(x) -> -bedroom(x).
+
+    childrenRoom(x) -> -bedroom(x).
+
+
+    %indicii initiale 
+    readingSonnets(Bill).
+
+    %indicii
+    %1
+    kitchen(Daddy).   
+    %2
+    preparesPhilosophyExam(x) -> readingPhilosophyText(x).
+    preparesPhilosophyExam(Melanie).  
+    %3
+    openShoes(x) -> sandels(x).
+    openShoes(Granny).         
+    %4 
+    preparingDinner(x) <->  watchingTV(x).
+    preparingDinner(x) <-> kitchen(x).
+    %5 
+    -bedroom(x).
+    %6 
+    bussinessStyle(x) -> officeShoes(x).
+    bussinessStyle(Daddy).
+    %7
+    lookingAfterFlowers(Mummy).
+    %8 sunt trei persoane in livingRoom
+    livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Granny) |
+    livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Melanie) |
+    livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Bill) | 
+    livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Melanie)  |
+    livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Bill) |
+    livingRoom(Daddy) & livingRoom(Melanie) & livingRoom(Bill) | 
+    livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Melanie)  | 
+    livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Bill) |
+    livingRoom(Mummy) & livingRoom(Bill) & livingRoom(Melanie) |
+    livingRoom(Granny) & livingRoom(Melanie) & livingRoom(Bill).
+    
+    %8 
+    childrenRoom(Bill).
+    %9 
+    jogging(x) -> sneakers1(x) | sneakers2(x).
+    jogging(Mummy).
+    jogging(Melanie).
+
+end_of_list.
+
+
+formulas(goals).
+    %watchingTV(Daddy).
+end_of_list.

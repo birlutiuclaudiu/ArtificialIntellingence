@@ -1,0 +1,20 @@
+
+set(arithmetic). 
+formulas(assumptions). 
+    Barber=0   &           Cutler=1    &  Drake=2.   %pentru elimiarea izomorfismului
+    Beth=0     &           Dorothy=1   &  Louise=2.
+    Allan=0    &           Henry=1     &  Victor=2.
+    
+    %pentru a realiza legatura intre copii
+    all x Wife(Father(x)) = Mother(x).
+    (Wife(x) = Wife(y)) -> x=y.
+    %copii diferiti 
+    (Mother(x) = Mother(y)) -> x=y.
+    (Father(x) = Father(y))-> x=y.
+    
+    %indiciile din enunt
+    Wife(Drake)!=Louise   &    Father(Henry)!=Drake.
+    Wife(Cutler)!=Beth    &    Mother(Allan)!=Beth.
+    (Father(Allan) =Cutler | Father(Allan) =Drake) -> Mother(Victor) = Louise.
+    Wife(Cutler)=Louise -> Mother(Allan)!=Dorothy.
+end_of_list.

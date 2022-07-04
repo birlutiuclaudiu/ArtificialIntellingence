@@ -1,0 +1,317 @@
+============================== Mace4 =================================
+Mace4 (64) version 2017-11A (CIIRC), November 2017.
+Process 13383 was started by birlutiuclaudiu on birlutiuclaudiu-HP-Pavilion-Laptop-15-cs3xxx,
+Tue Dec  7 18:50:32 2021
+The command was "mace4 -c -n 5 -m -1 -f 05_activities.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file 05_activities.in
+
+
+formulas(assumptions).
+differentFrom(Daddy,Mummy).
+differentFrom(Daddy,Granny).
+differentFrom(Daddy,Melanie).
+differentFrom(Daddy,Bill).
+differentFrom(Mummy,Granny).
+differentFrom(Mummy,Melanie).
+differentFrom(Mummy,Bill).
+differentFrom(Granny,Melanie).
+differentFrom(Granny,Bill).
+differentFrom(Melanie,Bill).
+differentFrom(x,y) -> differentFrom(y,x).
+sandels(x) | officeShoes(x) | laceBoots(x) | sneakers1(x) | sneakers2(x).
+kitchen(x) | livingRoom(x) | childrenRoom(x) | bedroom(x).
+preparingDinner(x) | lookingAfterFlowers(x) | readingNewsPaper(x) | readingPhilosophyText(x) | readingSonnets(x) | watchingTV(x).
+sandels(x) & sandels(y) -> -differentFrom(x,y).
+officeShoes(x) & officeShoes(y) -> -differentFrom(x,y).
+laceBoots(x) & laceBoots(y) -> -differentFrom(x,y).
+sneakers1(x) & sneakers1(y) -> -differentFrom(x,y).
+sneakers2(x) & sneakers2(y) -> -differentFrom(x,y).
+lookingAfterFlowers(x) & lookingAfterFlowers(y) -> -differentFrom(x,y).
+readingNewsPaper(x) & readingNewsPaper(y) -> -differentFrom(x,y).
+readingPhilosophyText(x) & readingPhilosophyText(y) -> -differentFrom(x,y).
+readingSonnets(x) & readingSonnets(y) -> -differentFrom(x,y).
+preparingDinner(x) & preparingDinner(y) -> -differentFrom(x,y).
+watchingTV(x) & watchingTV(y) -> -differentFrom(x,y).
+kitchen(x) -> -livingRoom(x).
+kitchen(x) -> -childrenRoom(x).
+kitchen(x) -> -bedroom(x).
+livingRoom(x) -> -childrenRoom(x).
+livingRoom(x) -> -bedroom(x).
+childrenRoom(x) -> -bedroom(x).
+readingSonnets(Bill).
+kitchen(Daddy).
+preparesPhilosophyExam(x) -> readingPhilosophyText(x).
+preparesPhilosophyExam(Melanie).
+openShoes(x) -> sandels(x).
+openShoes(Granny).
+preparingDinner(x) <-> watchingTV(x).
+preparingDinner(x) <-> kitchen(x).
+-bedroom(x).
+bussinessStyle(x) -> officeShoes(x).
+bussinessStyle(Daddy).
+lookingAfterFlowers(Mummy).
+livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Granny) | livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Melanie) | livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Bill) | livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Melanie) | livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Bill) | livingRoom(Daddy) & livingRoom(Melanie) & livingRoom(Bill) | livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Melanie) | livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Bill) | livingRoom(Mummy) & livingRoom(Bill) & livingRoom(Melanie) | livingRoom(Granny) & livingRoom(Melanie) & livingRoom(Bill).
+childrenRoom(Bill).
+jogging(x) -> sneakers1(x) | sneakers2(x).
+jogging(Mummy).
+jogging(Melanie).
+end_of_list.
+
+formulas(goals).
+end_of_list.
+    % assign(domain_size, 5) -> assign(start_size, 5).
+    % assign(domain_size, 5) -> assign(end_size, 5).
+
+% From the command line: assign(domain_size, 5).
+
+% From the command line: assign(max_models, -1).
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 differentFrom(x,y) -> differentFrom(y,x) # label(non_clause).  [assumption].
+2 sandels(x) & sandels(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+3 officeShoes(x) & officeShoes(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+4 laceBoots(x) & laceBoots(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+5 sneakers1(x) & sneakers1(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+6 sneakers2(x) & sneakers2(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+7 lookingAfterFlowers(x) & lookingAfterFlowers(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+8 readingNewsPaper(x) & readingNewsPaper(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+9 readingPhilosophyText(x) & readingPhilosophyText(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+10 readingSonnets(x) & readingSonnets(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+11 preparingDinner(x) & preparingDinner(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+12 watchingTV(x) & watchingTV(y) -> -differentFrom(x,y) # label(non_clause).  [assumption].
+13 kitchen(x) -> -livingRoom(x) # label(non_clause).  [assumption].
+14 kitchen(x) -> -childrenRoom(x) # label(non_clause).  [assumption].
+15 kitchen(x) -> -bedroom(x) # label(non_clause).  [assumption].
+16 livingRoom(x) -> -childrenRoom(x) # label(non_clause).  [assumption].
+17 livingRoom(x) -> -bedroom(x) # label(non_clause).  [assumption].
+18 childrenRoom(x) -> -bedroom(x) # label(non_clause).  [assumption].
+19 preparesPhilosophyExam(x) -> readingPhilosophyText(x) # label(non_clause).  [assumption].
+20 openShoes(x) -> sandels(x) # label(non_clause).  [assumption].
+21 preparingDinner(x) <-> watchingTV(x) # label(non_clause).  [assumption].
+22 preparingDinner(x) <-> kitchen(x) # label(non_clause).  [assumption].
+23 bussinessStyle(x) -> officeShoes(x) # label(non_clause).  [assumption].
+24 livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Granny) | livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Melanie) | livingRoom(Daddy) & livingRoom(Mummy) & livingRoom(Bill) | livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Melanie) | livingRoom(Daddy) & livingRoom(Granny) & livingRoom(Bill) | livingRoom(Daddy) & livingRoom(Melanie) & livingRoom(Bill) | livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Melanie) | livingRoom(Mummy) & livingRoom(Granny) & livingRoom(Bill) | livingRoom(Mummy) & livingRoom(Bill) & livingRoom(Melanie) | livingRoom(Granny) & livingRoom(Melanie) & livingRoom(Bill) # label(non_clause).  [assumption].
+25 jogging(x) -> sneakers1(x) | sneakers2(x) # label(non_clause).  [assumption].
+
+============================== end of process non-clausal formulas ===
+
+============================== CLAUSES FOR SEARCH ====================
+
+formulas(mace4_clauses).
+differentFrom(Daddy,Mummy).
+differentFrom(Daddy,Granny).
+differentFrom(Daddy,Melanie).
+differentFrom(Daddy,Bill).
+differentFrom(Mummy,Granny).
+differentFrom(Mummy,Melanie).
+differentFrom(Mummy,Bill).
+differentFrom(Granny,Melanie).
+differentFrom(Granny,Bill).
+differentFrom(Melanie,Bill).
+-differentFrom(x,y) | differentFrom(y,x).
+sandels(x) | officeShoes(x) | laceBoots(x) | sneakers1(x) | sneakers2(x).
+kitchen(x) | livingRoom(x) | childrenRoom(x) | bedroom(x).
+preparingDinner(x) | lookingAfterFlowers(x) | readingNewsPaper(x) | readingPhilosophyText(x) | readingSonnets(x) | watchingTV(x).
+-sandels(x) | -sandels(y) | -differentFrom(x,y).
+-officeShoes(x) | -officeShoes(y) | -differentFrom(x,y).
+-laceBoots(x) | -laceBoots(y) | -differentFrom(x,y).
+-sneakers1(x) | -sneakers1(y) | -differentFrom(x,y).
+-sneakers2(x) | -sneakers2(y) | -differentFrom(x,y).
+-lookingAfterFlowers(x) | -lookingAfterFlowers(y) | -differentFrom(x,y).
+-readingNewsPaper(x) | -readingNewsPaper(y) | -differentFrom(x,y).
+-readingPhilosophyText(x) | -readingPhilosophyText(y) | -differentFrom(x,y).
+-readingSonnets(x) | -readingSonnets(y) | -differentFrom(x,y).
+-preparingDinner(x) | -preparingDinner(y) | -differentFrom(x,y).
+-watchingTV(x) | -watchingTV(y) | -differentFrom(x,y).
+-kitchen(x) | -livingRoom(x).
+-kitchen(x) | -childrenRoom(x).
+-kitchen(x) | -bedroom(x).
+-livingRoom(x) | -childrenRoom(x).
+-livingRoom(x) | -bedroom(x).
+-childrenRoom(x) | -bedroom(x).
+readingSonnets(Bill).
+kitchen(Daddy).
+-preparesPhilosophyExam(x) | readingPhilosophyText(x).
+preparesPhilosophyExam(Melanie).
+-openShoes(x) | sandels(x).
+openShoes(Granny).
+-preparingDinner(x) | watchingTV(x).
+preparingDinner(x) | -watchingTV(x).
+-preparingDinner(x) | kitchen(x).
+preparingDinner(x) | -kitchen(x).
+-bedroom(x).
+-bussinessStyle(x) | officeShoes(x).
+bussinessStyle(Daddy).
+lookingAfterFlowers(Mummy).
+livingRoom(Daddy) | livingRoom(Mummy) | livingRoom(Granny).
+livingRoom(Daddy) | livingRoom(Melanie) | livingRoom(Mummy).
+livingRoom(Daddy) | livingRoom(Melanie) | livingRoom(Granny).
+livingRoom(Daddy) | livingRoom(Melanie) | livingRoom(Bill).
+livingRoom(Daddy) | livingRoom(Bill) | livingRoom(Mummy).
+livingRoom(Daddy) | livingRoom(Bill) | livingRoom(Granny).
+livingRoom(Mummy) | livingRoom(Granny) | livingRoom(Melanie).
+livingRoom(Mummy) | livingRoom(Granny) | livingRoom(Bill).
+livingRoom(Mummy) | livingRoom(Melanie) | livingRoom(Bill).
+livingRoom(Granny) | livingRoom(Melanie) | livingRoom(Bill).
+childrenRoom(Bill).
+-jogging(x) | sneakers1(x) | sneakers2(x).
+jogging(Mummy).
+jogging(Melanie).
+end_of_list.
+
+============================== end of clauses for search =============
+
+% There are no natural numbers in the input.
+
+============================== DOMAIN SIZE 5 =========================
+
+============================== MODEL =================================
+
+interpretation( 5, [number=1, seconds=0], [
+
+        function(Bill, [ 0 ]),
+
+        function(Daddy, [ 1 ]),
+
+        function(Granny, [ 2 ]),
+
+        function(Melanie, [ 3 ]),
+
+        function(Mummy, [ 4 ]),
+
+        relation(bedroom(_), [ 0, 0, 0, 0, 0 ]),
+
+        relation(bussinessStyle(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(childrenRoom(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(jogging(_), [ 0, 0, 0, 1, 1 ]),
+
+        relation(kitchen(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(laceBoots(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(livingRoom(_), [ 0, 0, 1, 1, 1 ]),
+
+        relation(lookingAfterFlowers(_), [ 0, 0, 0, 0, 1 ]),
+
+        relation(officeShoes(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(openShoes(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(preparesPhilosophyExam(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(preparingDinner(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(readingNewsPaper(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(readingPhilosophyText(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(readingSonnets(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(sandels(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(sneakers1(_), [ 0, 0, 0, 0, 1 ]),
+
+        relation(sneakers2(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(watchingTV(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(differentFrom(_,_), [
+			   0, 1, 1, 1, 1,
+			   1, 0, 1, 1, 1,
+			   1, 1, 0, 1, 1,
+			   1, 1, 1, 0, 1,
+			   1, 1, 1, 1, 0 ])
+]).
+
+============================== end of model ==========================
+
+============================== MODEL =================================
+
+interpretation( 5, [number=2, seconds=0], [
+
+        function(Bill, [ 0 ]),
+
+        function(Daddy, [ 1 ]),
+
+        function(Granny, [ 2 ]),
+
+        function(Melanie, [ 3 ]),
+
+        function(Mummy, [ 4 ]),
+
+        relation(bedroom(_), [ 0, 0, 0, 0, 0 ]),
+
+        relation(bussinessStyle(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(childrenRoom(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(jogging(_), [ 0, 0, 0, 1, 1 ]),
+
+        relation(kitchen(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(laceBoots(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(livingRoom(_), [ 0, 0, 1, 1, 1 ]),
+
+        relation(lookingAfterFlowers(_), [ 0, 0, 0, 0, 1 ]),
+
+        relation(officeShoes(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(openShoes(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(preparesPhilosophyExam(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(preparingDinner(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(readingNewsPaper(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(readingPhilosophyText(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(readingSonnets(_), [ 1, 0, 0, 0, 0 ]),
+
+        relation(sandels(_), [ 0, 0, 1, 0, 0 ]),
+
+        relation(sneakers1(_), [ 0, 0, 0, 1, 0 ]),
+
+        relation(sneakers2(_), [ 0, 0, 0, 0, 1 ]),
+
+        relation(watchingTV(_), [ 0, 1, 0, 0, 0 ]),
+
+        relation(differentFrom(_,_), [
+			   0, 1, 1, 1, 1,
+			   1, 0, 1, 1, 1,
+			   1, 1, 0, 1, 1,
+			   1, 1, 1, 0, 1,
+			   1, 1, 1, 1, 0 ])
+]).
+
+============================== end of model ==========================
+
+============================== STATISTICS ============================
+
+For domain size 5.
+
+Current CPU time: 0.00 seconds (total CPU time: 0.00 seconds).
+Ground clauses: seen=419, kept=419.
+Selections=21, assignments=44, propagations=259, current_models=2.
+Rewrite_terms=95, rewrite_bools=1563, indexes=48.
+Rules_from_neg_clauses=1, cross_offs=10.
+
+============================== end of statistics =====================
+
+User_CPU=0.00, System_CPU=0.00, Wall_clock=0.
+
+Exiting with 2 models.
+
+Process 13383 exit (all_models) Tue Dec  7 18:50:32 2021
+The process finished Tue Dec  7 18:50:32 2021

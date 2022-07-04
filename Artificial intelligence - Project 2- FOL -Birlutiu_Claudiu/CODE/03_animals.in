@@ -1,0 +1,37 @@
+
+%Angered at his failure to trick Abou, the merchant,
+%the genie transformed him and his three brothers into
+%animals. He turned one into a pig, one into a donkey,
+%one into a camel, and one into a goat.
+%1. Ahmed didn't become a pig, and he wasn't a goat.
+%2. Sharif wasn't a camel, and he wasn't a pig.
+%3. If Ahmed was not a camel, Omar was not a pig.
+%4. Abou didn't become a goat, and he was not a pig.
+%5. Omar was not a goat nor was he a camel.
+%What did each of the brothers become?
+
+set(arithmetic).  % Pentru folosirea operatorilor aritmetici
+assign(domain_size, 4).  % Dimensiunea domeniului este 4; 4 frati sunt transformati in animale
+
+formulas(assumptions). 
+   %apartenenta la un sigur tip de animal
+   Pig(x)    -> -Donkey(x) & -Camel(x) & -Goat(x).
+   Donkey(x) -> -Pig(x) & -Camel(x) & -Goat(x).
+   Camel(x)  -> -Pig(x) & -Donkey(x) & -Goat(x).
+   Goat(x)   -> -Pig(x) & -Donkey(x) & -Camel(x).
+
+   %definirea existentei celor 4 animale si unicitatea acestora
+   (exists x Pig(x) ) &  (exists x Donkey(x) ) & (exists x Camel(x) ) & (exists x Goat(x) ).
+   Pig(x) & Pig(y)       -> x=y.
+   Donkey(x) & Donkey(y) -> x=y.
+   Camel(x) & Camel(y)   -> x=y.
+   Goat(x) & Goat(y)     -> x=y.
+   
+   Abou=0. Ahmed=1. Omar=2. Sharif=3.     %evitare izomorfism 
+   %indicii
+   -Pig(Ahmed).
+   -Camel(Sharif) & -Pig(Sharif).
+   -Camel(Ahmed) -> -Pig(Omar).
+   -Goat(Abou) & -Pig(Abou).
+   -Goat(Omar) & -Camel(Omar).
+end_of_list.

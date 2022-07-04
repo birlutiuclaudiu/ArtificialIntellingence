@@ -1,0 +1,130 @@
+\section{Uninformed search}
+
+% ============================================= DFS ============================================= 
+\subsection{Question 1 - Depth-first search}
+% enuntul intrebarii
+In aceasta sectiune va fi prezentatata implementarea problemei 2.14 din laborator, al carei enunt este: \newline
+
+
+\textit{"In search.py, implement \textbf{Depth-First search(DFS) algorithm} in  function \textit{depthFirstSearch}. Don’t  forget that DFS graph search is graph-search with the frontier as a LIFO queue(Stack)."}.
+
+
+\subsubsection{Code implementation}
+In continuare se regaseste codul propus pentru implemetarea acestui \textbf{algoritm de cuatare}. In incercarea de implementare si apoi testare a solutiei propuse am apelat mai multe comenzi din terminal pentru a vedea evolutia agentului \textit{pacman} in procesul de cautare a solutiei sale.   \newline\newline\newline    \\
+
+\textbf{Code:}
+% a se completa fisierul code/dfs.py
+\inputminted[linenos]{python}{code/01_dfs.py}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item  la linia 4 am importat structura de date Stack implementata in achetul util; aceasta structura permite adaugarea unui element, scoaterea elementului cel mai recent adaugat si permite verificarea starii acesteia ( daca stiva e goala)
+    \item  la linia 4 ne declaram o variabila de tipul Stack, in care se vor adauga nodurile din frontiera in momentul expandarii grafului de cautare
+    \item  la linia 6 ne declaram o lista ce va contine nodurile deja explorate
+    \item  la lina 7 ne declaram nodul de start; Pentru aceasta s-a crea o clasa ce reprezinta structura de date a unui nod. Atributele acestei clase sunt: starea (pozitia din grid), nodul parinte, action (actiunea prin care s-a ajuns la el) si costul total al caii de la radacina 
+    \item la linia 8 se adauga in frontiera nodul de start, iar apoi se intra in bucla while a carei conditii de terminare il reprezinta testul pe frontiera. In cazul in care nu va mai exista nciun nod in frontiera va arata ca nu mai este niciun nod care sa fie expandat
+    \item incepand cu linia 11 pana la linia 24 se va descrie ideea algorimului dfs; intotdeauna se va lua nodul cel mai recent adaugat in frontiera: daca acesta este scopul problemei de cautare, atunci algorimul se va opri si va returna solutia, iar in caz contrar va continua prin expandarea succesorilor acestui nod si adaugarea lor in frontiera daca nu au fost deja adaugati. Deoarece avem acest test de verificare a nodurilor (daca sunt in lista de noduri explorate) inainte de a fi adaugate in frontiera, va determina o parcurgere de tip \textbf{graph search}
+    \item la linia 14 se verifica daca nodul extras din frontiera a fost deja explorat, in caz afirmativ va fi ignorat. Teoretic acest nod a fost adaugat de mai multe ori in frontiera deaorece nu s-a putut face testul de apartenenta pe structura Stack
+    \item pentru reconstructia actiunilor prin care s-a ajuns la nodul scop din nodul start s-a implementat functia \textbf{construct\_path(node)}, functie ce reconstruieste calea pe baza relatiei copil parinte
+    \item valoarea returnata de functie va fi o lista cu actiunile ce urmeaza sa le execute agentul din pozitia initiala pana la scop
+
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item  -l tinyMaze -p SearchAgent -a fn=dfs 
+    \item  -l bigMaze -z .5 -p  SearchAgent -a fn=dfs 
+    \item  -l mediumMaze -p -z .5  SearchAgent -a fn=dfs
+        
+\end{itemize}
+
+\subsubsection{Questions}
+
+
+
+\textbf{Q1:} Is the found solution optimal? Explain your answer.
+
+
+\textbf{A1:} Nu gaseste solutia optima, deoarece algorimul nu tine seama de costul drumului pe care il alege. Cum ii zice si numele, el va cauta cat mai mult in adancime, astfel va ajunge sa exploreze o ramura pana la nivelul cel mai de jos si apoi daca nu va reusi sa gaseasca solutia va cauta si pe celelalte ramuri  la un nivel mai apropiat de radacina si unde s-ar putea sa fie solutia \newline
+
+
+\textbf{Q2:} Run\textit{ autograder python autograder.py} and write the points for Question 1.
+
+
+\textbf{A2:} Question q1: 4/4
+
+
+\subsubsection{Personal observations and notes}
+Pentru bigMaze costul total al caii este de 210, iar numarul de noduri explorate este de 390.Pentru mediumMaze costul total al caii este de 130, iar numarul de noduri explorate este de 146.Se vor face niste comparatii cu celelalte rezultate obtinute pentru ceilalti algoritmi implementati la fiecare subsectiune. 
+\vspace{0.75cm}
+
+% ============================================= BFS ============================================= 
+\subsection{Question 2 - Breadth-first search}
+% enuntul intrebarii
+In continuare va fi descris exercitiul 2.15 din laborator:\newline
+
+
+\textit{"In \textbf{search.py}, implement the \textbf{Breadth-First search} algorithm in function \textit{breadthFirstSearch}."}.
+
+
+\subsubsection{Code implementation}
+In continuare se regaseste codul propus pentru implemetarea acestui \textbf{algoritm de cuatare}. In incercarea de implementare si apoi testare a solutiei propuse am apelat mai multe comenzi din terminal pentru a vedea evolutia agentului \textit{pacman} in procesul de cautare a solutiei sale.   \newline    \\
+
+
+\textbf{Code:}
+% a se completa fisierul code/bfs.py
+\inputminted[linenos]{python}{code/02_bfs.py}
+
+
+\textbf{Explanation:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item la linia 5 se importa structura de date Queue implementatata in util; ceasta structura permite adaugarea unui element, scoaterea elementului cel mai vechi adaugat si permite verificarea starii acesteia (daca e goala sau nu)
+    \item la linia 8 se declara o lista vida in care se vor adauga nodurile explorate 
+    \item in cazul acestei solutii va fi nevoie de o coada pentru a descrie frontiera 
+    \item la liniile 12 si 13 va fi creat nodul de start (care are aceeasi structura descrisa la cerinta anterioara) si va fi adaugat in frontiera
+    \item ideea acestui algoritm consta in scoaterea nodurilor din frontiera in ordinea in care au fost aduagate si expandarea acestora prin determinarea succesorilor si adaugarea lor in frontiera. Deoarece si in acest caz se merge pe o abordare de tip \textbf{graph search}, ianinte de a adauga in fronitera un nod se va verifica daca acesta nu a fost explorat deja.
+    \item deoarece si in cazul cozii implementate in util nu putem sa determinam daca un element e deja in coada, am mers pe aceeasi idee de a adauga duplicate, iar cand se vor extrage se vor ignora - la linia 19 e tratat acest caz
+    \item in cazul in care se ajunge la nodul scop se va opri cautarea si se va returna solutia problemei
+    \item pentru a construi calea de la nodul de start la nodul scop cu actiunile necesare se va apela functia \textbf{construct\_path(node)}
+
+\end{itemize}
+
+
+\textbf{Commands:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item  -l bigMaze -z .5 -p  SearchAgent -a fn=bfs
+    \item  -l mediumMaze -z .5 -p  SearchAgent -a fn=bfs
+    \item  -l tinyMaze -z .5 -p  SearchAgent -a fn=bfs
+        
+\end{itemize}
+
+\subsubsection{Questions}
+This sub-section is dedicated to the additional questions that come along with the exercise. Please answer to the following questions:\newline
+
+
+\textbf{Q1:} Is the found solution optimal? Explain your answer. 
+
+
+\textbf{A1:} Da, bfs va gasi intotdeuana solutia optima daca costul tranzitiilor este acelasi. In cazul lui pacman costul este de 1 pentru orice tranzitie dintr-o stare in alta. De fapt, bfs va gasi calea cea mai scurta pana la nodul scop, deoarece el parcurge graful nivel cu nivel. Cu alte cuvinte, cand se va explora un nod de la un nivel, toate nodurile din nivelele mai apropoiate de radacina au fost explorate. 
+
+
+\textbf{Q2:} Run autograder \textit{python autograder.py} and write the points for Question 2.
+
+
+\textbf{A2:} Question q2: 4/4
+
+
+\subsubsection{Personal observations and notes}
+Pentru bigMaze costul total al caii este de 210, iar numarul de noduri explorate este de 620.Pentru mediumMaze costul total al caii este de 68, iar numarul de noduri explorate este de 269. Diferentele ce se observa intre dfs si bfs sunt la nivelul nodurilor explorate si la costul caii gasite. Observam ca bfs gaseste mereu calea optima, dar va explora mult mai multe noduri decat o face dfs.
+
+\vspace{0.75cm}
+
+
+
+\subsection{References}
+R. Stuart, N. Peter, Artificial Intelligence: A Modern Approach, 4th US ed., capitol 3, [online]

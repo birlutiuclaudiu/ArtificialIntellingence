@@ -1,0 +1,280 @@
+============================== Mace4 =================================
+Mace4 (64) version 2017-11A (CIIRC), November 2017.
+Process 13146 was started by birlutiuclaudiu on birlutiuclaudiu-HP-Pavilion-Laptop-15-cs3xxx,
+Tue Dec  7 18:48:37 2021
+The command was "mace4 -c -n 5 -m -1 -f 02_bands.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file 02_bands.in
+
+set(arithmetic).
+    % set(arithmetic) -> clear(lnh).
+    % set(arithmetic) -> assign(selection_order, 0).
+
+    % Declaring Mace4 arithmetic parse types.
+assign(domain_size,5).
+    % assign(domain_size, 5) -> assign(start_size, 5).
+    % assign(domain_size, 5) -> assign(end_size, 5).
+
+list(distinct).
+[Bryan,Dustin,Eibert,Joey,Larry].
+[BalckShirt,BlueShirt,GreenShirt,RedShirt,WhiteShirt].
+[Age_26,Age_28,Age_30,Age_32,Age_34].
+[Bass,Drums,Guitar,Harmonica,Piano].
+[ApocalypseBlues,BearBlues,BluesUp,LazyBlues,TheBluesCathedral].
+[Apple,GrapeFruit,Lemon,Orange,StrawBerry].
+end_of_list.
+
+formulas(assumptions).
+right_neighbor(x,y) <-> x = y + 1.
+left_neighbor(x,y) <-> x + 1 = y.
+neighbor(x,y) <-> right_neighbor(x,y) | left_neighbor(x,y).
+left_neighbor(Harmonica,Guitar).
+BlueShirt > Age_34 & BlueShirt < RedShirt.
+Larry = 0 | Larry = 4.
+neighbor(Harmonica,Apple).
+StrawBerry = 1.
+Drums > BlueShirt.
+neighbor(Larry,LazyBlues).
+neighbor(Bryan,Piano).
+Age_26 = 0 | Age_26 = 4.
+Piano = ApocalypseBlues.
+left_neighbor(Age_28,Age_30).
+GreenShirt < BearBlues.
+neighbor(Joey,BlueShirt).
+right_neighbor(GrapeFruit,TheBluesCathedral).
+GrapeFruit = GreenShirt.
+Lemon > WhiteShirt & Lemon < Age_30.
+right_neighbor(BluesUp,RedShirt).
+Piano = 0.
+neighbor(Dustin,TheBluesCathedral).
+right_neighbor(Harmonica,RedShirt).
+end_of_list.
+    % assign(domain_size, 5) -> assign(start_size, 5).
+    % assign(domain_size, 5) -> assign(end_size, 5).
+
+% From the command line: assign(domain_size, 5).
+
+% From the command line: assign(max_models, -1).
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 right_neighbor(x,y) <-> x = y + 1 # label(non_clause).  [assumption].
+2 left_neighbor(x,y) <-> x + 1 = y # label(non_clause).  [assumption].
+3 neighbor(x,y) <-> right_neighbor(x,y) | left_neighbor(x,y) # label(non_clause).  [assumption].
+4 BlueShirt > Age_34 & BlueShirt < RedShirt # label(non_clause).  [assumption].
+5 Lemon > WhiteShirt & Lemon < Age_30 # label(non_clause).  [assumption].
+
+============================== end of process non-clausal formulas ===
+
+============================== CLAUSES FOR SEARCH ====================
+
+formulas(mace4_clauses).
+-right_neighbor(x,y) | y + 1 = x.
+right_neighbor(x,y) | y + 1 != x.
+-left_neighbor(x,y) | x + 1 = y.
+left_neighbor(x,y) | x + 1 != y.
+-neighbor(x,y) | right_neighbor(x,y) | left_neighbor(x,y).
+neighbor(x,y) | -right_neighbor(x,y).
+neighbor(x,y) | -left_neighbor(x,y).
+left_neighbor(Harmonica,Guitar).
+BlueShirt > Age_34.
+BlueShirt < RedShirt.
+Larry = 0 | Larry = 4.
+neighbor(Harmonica,Apple).
+StrawBerry = 1.
+Drums > BlueShirt.
+neighbor(Larry,LazyBlues).
+neighbor(Bryan,Piano).
+Age_26 = 0 | Age_26 = 4.
+Piano = ApocalypseBlues.
+left_neighbor(Age_28,Age_30).
+GreenShirt < BearBlues.
+neighbor(Joey,BlueShirt).
+right_neighbor(GrapeFruit,TheBluesCathedral).
+GrapeFruit = GreenShirt.
+Lemon > WhiteShirt.
+Lemon < Age_30.
+right_neighbor(BluesUp,RedShirt).
+Piano = 0.
+neighbor(Dustin,TheBluesCathedral).
+right_neighbor(Harmonica,RedShirt).
+Bryan != Dustin.
+Bryan != Eibert.
+Bryan != Joey.
+Bryan != Larry.
+Dustin != Eibert.
+Dustin != Joey.
+Dustin != Larry.
+Eibert != Joey.
+Eibert != Larry.
+Joey != Larry.
+BalckShirt != BlueShirt.
+BalckShirt != GreenShirt.
+BalckShirt != RedShirt.
+BalckShirt != WhiteShirt.
+BlueShirt != GreenShirt.
+BlueShirt != RedShirt.
+BlueShirt != WhiteShirt.
+GreenShirt != RedShirt.
+GreenShirt != WhiteShirt.
+RedShirt != WhiteShirt.
+Age_26 != Age_28.
+Age_26 != Age_30.
+Age_26 != Age_32.
+Age_26 != Age_34.
+Age_28 != Age_30.
+Age_28 != Age_32.
+Age_28 != Age_34.
+Age_30 != Age_32.
+Age_30 != Age_34.
+Age_32 != Age_34.
+Bass != Drums.
+Bass != Guitar.
+Bass != Harmonica.
+Bass != Piano.
+Drums != Guitar.
+Drums != Harmonica.
+Drums != Piano.
+Guitar != Harmonica.
+Guitar != Piano.
+Harmonica != Piano.
+ApocalypseBlues != BearBlues.
+ApocalypseBlues != BluesUp.
+ApocalypseBlues != LazyBlues.
+ApocalypseBlues != TheBluesCathedral.
+BearBlues != BluesUp.
+BearBlues != LazyBlues.
+BearBlues != TheBluesCathedral.
+BluesUp != LazyBlues.
+BluesUp != TheBluesCathedral.
+LazyBlues != TheBluesCathedral.
+Apple != GrapeFruit.
+Apple != Lemon.
+Apple != Orange.
+Apple != StrawBerry.
+GrapeFruit != Lemon.
+GrapeFruit != Orange.
+GrapeFruit != StrawBerry.
+Lemon != Orange.
+Lemon != StrawBerry.
+Orange != StrawBerry.
+end_of_list.
+
+============================== end of clauses for search =============
+
+% The largest natural number in the input is 4.
+
+============================== DOMAIN SIZE 5 =========================
+
+============================== MODEL =================================
+
+interpretation( 5, [number=1, seconds=0], [
+
+        function(Age_26, [ 4 ]),
+
+        function(Age_28, [ 2 ]),
+
+        function(Age_30, [ 3 ]),
+
+        function(Age_34, [ 0 ]),
+
+        function(ApocalypseBlues, [ 0 ]),
+
+        function(Apple, [ 4 ]),
+
+        function(BearBlues, [ 4 ]),
+
+        function(BlueShirt, [ 1 ]),
+
+        function(BluesUp, [ 3 ]),
+
+        function(Bryan, [ 1 ]),
+
+        function(Drums, [ 2 ]),
+
+        function(Dustin, [ 3 ]),
+
+        function(GrapeFruit, [ 3 ]),
+
+        function(GreenShirt, [ 3 ]),
+
+        function(Guitar, [ 4 ]),
+
+        function(Harmonica, [ 3 ]),
+
+        function(Joey, [ 2 ]),
+
+        function(Larry, [ 0 ]),
+
+        function(LazyBlues, [ 1 ]),
+
+        function(Lemon, [ 2 ]),
+
+        function(Piano, [ 0 ]),
+
+        function(RedShirt, [ 2 ]),
+
+        function(StrawBerry, [ 1 ]),
+
+        function(TheBluesCathedral, [ 2 ]),
+
+        function(WhiteShirt, [ 0 ]),
+
+        relation(left_neighbor(_,_), [
+			   0, 1, 0, 0, 0,
+			   0, 0, 1, 0, 0,
+			   0, 0, 0, 1, 0,
+			   0, 0, 0, 0, 1,
+			   0, 0, 0, 0, 0 ]),
+
+        relation(neighbor(_,_), [
+			   0, 1, 0, 0, 0,
+			   1, 0, 1, 0, 0,
+			   0, 1, 0, 1, 0,
+			   0, 0, 1, 0, 1,
+			   0, 0, 0, 1, 0 ]),
+
+        relation(right_neighbor(_,_), [
+			   0, 0, 0, 0, 0,
+			   1, 0, 0, 0, 0,
+			   0, 1, 0, 0, 0,
+			   0, 0, 1, 0, 0,
+			   0, 0, 0, 1, 0 ]),
+
+        function(Age_32, [ 1 ]),
+
+        function(BalckShirt, [ 4 ]),
+
+        function(Bass, [ 1 ]),
+
+        function(Eibert, [ 4 ]),
+
+        function(Orange, [ 0 ])
+]).
+
+============================== end of model ==========================
+
+============================== STATISTICS ============================
+
+For domain size 5.
+
+Current CPU time: 0.00 seconds (total CPU time: 0.00 seconds).
+Ground clauses: seen=257, kept=157.
+Selections=87, assignments=435, propagations=333, current_models=1.
+Rewrite_terms=2693, rewrite_bools=1604, indexes=0.
+Rules_from_neg_clauses=243, cross_offs=1064.
+
+============================== end of statistics =====================
+
+User_CPU=0.00, System_CPU=0.00, Wall_clock=0.
+
+Exiting with 1 model.
+
+Process 13146 exit (all_models) Tue Dec  7 18:48:37 2021
+The process finished Tue Dec  7 18:48:37 2021

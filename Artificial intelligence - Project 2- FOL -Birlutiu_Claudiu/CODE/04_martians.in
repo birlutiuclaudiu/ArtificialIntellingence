@@ -1,0 +1,38 @@
+set(arithmetic).  %Pentru simplificare relatii
+
+list(distinct).      % Objects in each list are distinct.
+    [Aken, Bal, Cwos, Doman].
+end_of_list.
+
+formulas(assumptions). 
+   Aken=0. Bal=1. Cwos=2. Doman=3.
+   Uti(x)    -> -Yomi(x) & -Grundi(x).
+   Yomi(x)   -> -Uti(x)  & -Grundi(x).
+   Grundi(x) -> -Uti(x)  & -Yomi(x). 
+   
+   Uti(Aken) | Yomi(Aken) | Grundi(Aken).
+   Uti(Bal) | Yomi(Bal) | Grundi(Bal).
+   Uti(Cwos) | Yomi(Cwos) | Grundi(Cwos).
+
+   Uti(Aken) -> -Uti(Bal) & -Uti(Cwos).
+   Uti(Bal)  -> -Uti(Aken) & -Uti(Cwos).
+   Uti(Cwos) -> -Uti(Bal) & -Uti(Aken).
+
+   Yomi(Aken) -> -Yomi(Bal)  & -Yomi(Cwos).
+   Yomi(Bal)  -> -Yomi(Aken) & -Yomi(Cwos).
+   Yomi(Cwos) -> -Yomi(Bal)  & -Yomi(Aken).
+
+   Grundi(Aken) ->  -Grundi(Bal)  & -Grundi(Cwos).
+   Grundi(Bal)  ->  -Grundi(Aken) & -Grundi(Cwos).
+   Grundi(Cwos) ->  -Grundi(Bal)  & -Grundi(Aken).
+
+   Uti(Aken)  -> -Uti(Aken) & Yomi(Doman).
+   Yomi(Aken) -> Uti(Aken) & -Yomi(Doman).
+
+   Uti(Bal) -> -Yomi(Bal) & Grundi(Doman).
+   Yomi(Bal) -> Yomi(Bal) & -Grundi(Doman).
+
+   Uti(Cwos) -> -Grundi(Cwos) & Uti(Doman).
+   Yomi(Cwos) -> Grundi(Cwos) & -Uti(Doman).
+ 
+end_of_list.
